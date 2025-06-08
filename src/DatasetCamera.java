@@ -77,8 +77,11 @@ public class DatasetCamera {
 
     public void printInfo() {
         System.out.println("Model: " + model);
-        System.out.println("Berat: " + weight + " gram");
-        System.out.println("Harga: $" + price);
+        System.out.println("Release: " + releaseDate);
+        System.out.println("Price: $" + price);
+        System.out.println("Resolution: " + maxResolution + "px");
+        System.out.println("Weight: " + weight + "g");
+        System.out.println("---------------------------");
     }
 
 

@@ -1,11 +1,12 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         String file = "camera_dataset.csv";
         DatasetCamera[] listCamera = new DatasetCamera[1038];
-
+        Scanner input = new Scanner(System.in);
         if (!file.endsWith(".csv")) {
             System.out.println("File harus berformat CSV !!");
             return;
@@ -44,12 +45,40 @@ public class Main {
                     System.out.println("Error parsing angka: " + e.getMessage());
                 }
             }
+            System.out.println("=== 5 Kamera Pertama ===");
+            for (int i = 0; i < 5 && i < listCamera.length; i++) {
+                listCamera[i].printInfo();
+            }
+
+            //Linear Search
+            System.out.print("Masukkan nama model kamera yang ingin dicari: ");
+            String key = input.nextLine();
+            boolean found = false;
 
             for (int i = 0; i < listCamera.length; i++) {
-                if (listCamera[i] != null && listCamera[i].getModel().equalsIgnoreCase("HP Photosmart R927")) {
+                if (listCamera[i] != null && listCamera[i].getModel().equalsIgnoreCase(key)) {
+                    found = true;
                     listCamera[i].printInfo(true);
                     break;
                 }
+            }
+            if (!found){
+                System.out.println("Kamera tidak di temukan");
+            }
+
+            // Bubble Sort
+            for (int i = 0; i < idx - 1; i++) {
+                for (int j = 0; j < idx - i - 1; j++) {
+                    if (listCamera[j].getPrice() > listCamera[j + 1].getPrice()) {
+                        DatasetCamera temp = listCamera[j];
+                        listCamera[j] = listCamera[j + 1];
+                        listCamera[j + 1] = temp;
+                    }
+                }
+            }
+            System.out.println("=== 5 Kamera Termurah ===");
+            for (int i = 0; i < 5 && i < idx; i++) {
+                listCamera[i].printInfo();
             }
 
         } catch (Exception e) {
